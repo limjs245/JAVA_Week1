@@ -1,5 +1,6 @@
 package InternetExample;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MidpointCircle {
@@ -9,10 +10,9 @@ public class MidpointCircle {
         String[][] buffer = new String[2 * r + 1][2 * r + 1];
 
         // 버퍼를 배경 문자열("⬛")로 초기화
-        for (int i = 0; i < buffer.length; i++) {
-            for (int j = 0; j < buffer[i].length; j++) {
-                buffer[i][j] = "⬛|"; // 쌍따옴표 사용
-            }
+        for (String[] value : buffer) {
+            // 쌍따옴표 사용
+            Arrays.fill(value, "⬛|");
         }
 
         int x = 0;
@@ -33,9 +33,9 @@ public class MidpointCircle {
         }
 
         // 버퍼 내용 출력
-        for (int i = 0; i < buffer.length; i++) {
-            for (int j = 0; j < buffer[i].length; j++) {
-                System.out.print(buffer[i][j]);
+        for (String[] strings : buffer) {
+            for (String string : strings) {
+                System.out.print(string);
             }
             System.out.println();
         }
@@ -43,20 +43,17 @@ public class MidpointCircle {
 
     // 매개변수 타입을 String[][]으로 변경
     private static void plotCirclePoints(String[][] buffer, int radius, int x, int y) {
-        int centerX = radius;
-        int centerY = radius;
-
         // 원을 그리는 문자열을 "⬜|"로 변경
         String circleChar = "⬜|";
 
-        buffer[centerY + y][centerX + x] = circleChar;
-        buffer[centerY + y][centerX - x] = circleChar;
-        buffer[centerY - y][centerX + x] = circleChar;
-        buffer[centerY - y][centerX - x] = circleChar;
-        buffer[centerY + x][centerX + y] = circleChar;
-        buffer[centerY + x][centerX - y] = circleChar;
-        buffer[centerY - x][centerX + y] = circleChar;
-        buffer[centerY - x][centerX - y] = circleChar;
+        buffer[radius + y][radius + x] = circleChar;
+        buffer[radius + y][radius - x] = circleChar;
+        buffer[radius - y][radius + x] = circleChar;
+        buffer[radius - y][radius - x] = circleChar;
+        buffer[radius + x][radius + y] = circleChar;
+        buffer[radius + x][radius - y] = circleChar;
+        buffer[radius - x][radius + y] = circleChar;
+        buffer[radius - x][radius - y] = circleChar;
     }
 
     public static void main(String[] args) {
